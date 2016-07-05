@@ -3,6 +3,7 @@ package com.adrian.c1tappydefender;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 /**
  * Created by Adrian on 04/07/16.
@@ -13,6 +14,9 @@ public class PlayerShip {
     private int x, y;
     private int speed = 0;
     private boolean boosting;
+
+    // A hit box for collision detection
+    private Rect hitBox;
 
     private final int GRAVITY = -12;
     // Stop ship leaving the screen
@@ -27,10 +31,16 @@ public class PlayerShip {
         this.x = 50;
         this.y = 50;
         speed = 1;
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
+        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.spaceship);
         boosting = false;
         maxY = screenY - bitmap.getHeight();
         minY = 0;
+        // Initialize the hit box
+        hitBox = new Rect(x, y, bitmap.getWidth(), bitmap.getHeight());
+    }
+
+    public Rect getHitbox(){
+        return hitBox;
     }
 
     public void update() {
@@ -59,6 +69,12 @@ public class PlayerShip {
         if (y > maxY) {
             y = maxY;
         }
+
+        // Refresh hit box location
+        hitBox.left = x;
+        hitBox.top = y;
+        hitBox.right = x + bitmap.getWidth();
+        hitBox.bottom = y + bitmap.getHeight();
 
     }
 
