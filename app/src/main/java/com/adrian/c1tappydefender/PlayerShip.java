@@ -15,6 +15,8 @@ public class PlayerShip {
     private int speed = 0;
     private boolean boosting;
 
+    private int shieldStrength;
+
     // A hit box for collision detection
     private Rect hitBox;
 
@@ -28,6 +30,7 @@ public class PlayerShip {
 
     // Constructor
     public PlayerShip(Context context, int x, int screenY) {
+        shieldStrength=2;
         this.x = 50;
         this.y = 50;
         speed = 1;
@@ -47,7 +50,7 @@ public class PlayerShip {
         // Are we boosting?
         if (boosting) {
         // Speed up
-            speed += 2;
+            speed += 3;
         } else {
         // Slow down
             speed -= 5;
@@ -101,5 +104,13 @@ public class PlayerShip {
 
     public int getY() {
         return y;
+    }
+
+    public int getShieldStrength() {
+        return shieldStrength;
+    }
+
+    public void reduceShieldStrength(){
+        shieldStrength --;
     }
 }

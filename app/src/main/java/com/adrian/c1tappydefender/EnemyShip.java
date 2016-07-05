@@ -31,6 +31,9 @@ public class EnemyShip {
     public EnemyShip(Context context, int screenX, int screenY){
         bitmap = BitmapFactory.decodeResource
                 (context.getResources(), R.drawable.enemy);
+
+        scaleBitmap(screenX);
+
         maxX = screenX;
         maxY = screenY;
         minX = 0;
@@ -72,6 +75,23 @@ public class EnemyShip {
         hitBox.top = y;
         hitBox.right = x + bitmap.getWidth();
         hitBox.bottom = y + bitmap.getHeight();
+    }
+
+    public void scaleBitmap(int x){
+
+        if(x < 1000) {
+
+            bitmap = Bitmap.createScaledBitmap(bitmap,
+                    bitmap.getWidth() / 3,
+                    bitmap.getHeight() / 3,
+                    false);
+
+        }else if(x < 1200){
+            bitmap = Bitmap.createScaledBitmap(bitmap,
+                    bitmap.getWidth() / 2,
+                    bitmap.getHeight() / 2,
+                    false);
+        }
     }
 
     public Bitmap getBitmap() {
